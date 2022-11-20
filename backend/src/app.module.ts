@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { BooksModule } from './books/books.module';
+import { BookBorrowingModule } from './book-borrowing/book-borrowing.module';
 
 @Module({
   imports: [
@@ -12,7 +13,8 @@ import { BooksModule } from './books/books.module';
     ConfigModule.forRoot({
       isGlobal: true
     }),
-    BooksModule
+    BooksModule,
+    BookBorrowingModule
   ],
   providers: [PrismaService],
 })
