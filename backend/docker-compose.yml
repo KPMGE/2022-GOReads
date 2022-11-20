@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  db: 
+    image: postgres:14-alpine
+    container_name: goreads
+    restart: always
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      timeout: 1s
+      retries: 20
+    environment: 
+      POSTGRES_DB: goreads
