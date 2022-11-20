@@ -30,8 +30,8 @@ export class BookBorrowingService {
     return await this.prismaService.bookBorrowing.findMany()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} bookBorrowing`;
+  async findOne(id: number) {
+    return await this.prismaService.bookBorrowing.findUnique({ where: { id } })
   }
 
   update(id: number, updateBookBorrowingDto: UpdateBookBorrowingDto) {
