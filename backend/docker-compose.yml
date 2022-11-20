@@ -14,3 +14,5 @@ services:
       retries: 20
     environment: 
       POSTGRES_DB: goreads
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 1234
