@@ -15,6 +15,14 @@ export class UserService {
     private readonly config: ConfigService
   ) { }
 
+  async getMyBorrowings(userId: number): Promise<BookBorrowing[]> {
+    return this.prismaService.bookBorrowing.findMany({
+      where: {
+        user_id: userId
+      }
+    })
+  }
+
   async findAll(): Promise<User[]> {
     return this.prismaService.user.findMany()
   }

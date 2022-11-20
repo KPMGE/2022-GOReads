@@ -8,6 +8,12 @@ import { UserService } from './user.service';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Get('/myBorrowings')
+  getMyBorrowings(@GetUser() user: User) {
+    return this.userService.getMyBorrowings(user.id)
+  }
+
   @Get()
   findAll() {
     return this.userService.findAll()
