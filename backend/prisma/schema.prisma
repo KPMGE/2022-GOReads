@@ -39,7 +39,6 @@ model BookBorrowing {
   id                 Int      @id @default(autoincrement())
   created_at         DateTime @default(now())
   updated_at         DateTime @default(now())
-  borrowing_date     DateTime
   borrowing_duration Int
   fine_per_day       Float
 
