@@ -24,11 +24,11 @@ export class BooksService {
   }
 
   async findAll() {
-    return this.prismaService.book.findMany()
+    return await this.prismaService.book.findMany()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} book`;
+  async findOne(id: number) {
+    return await this.prismaService.book.findUnique({ where: { id } })
   }
 
   update(id: number, updateBookDto: UpdateBookDto) {
