@@ -43,7 +43,7 @@ export class BookBorrowingService {
     })
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} bookBorrowing`;
+  async remove(id: number) {
+    return await this.prismaService.bookBorrowing.delete({ where: { id } })
   }
 }
