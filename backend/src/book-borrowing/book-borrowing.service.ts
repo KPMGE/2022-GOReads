@@ -15,7 +15,6 @@ export class BookBorrowingService {
       data: { 
         fine_per_day: dto.finePerDay,
         borrowing_duration: dto.borrowingDuration,
-        borrowing_date: new Date(dto.borrowingDate),
         book: { 
           connect: { id: dto.bookId }
         },
@@ -34,8 +33,14 @@ export class BookBorrowingService {
     return await this.prismaService.bookBorrowing.findUnique({ where: { id } })
   }
 
-  update(id: number, updateBookBorrowingDto: UpdateBookBorrowingDto) {
-    return `This action updates a #${id} bookBorrowing`;
+  async update(id: number, dto: UpdateBookBorrowingDto) {
+    return await this.prismaService.bookBorrowing.update({
+      where: { id },
+      data: { 
+        borrowing_duration: dto.borrowingDuration,
+        fine_per_day: dto.finePerDay,
+      }
+    })
   }
 
   remove(id: number) {

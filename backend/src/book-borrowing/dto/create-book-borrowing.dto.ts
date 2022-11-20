@@ -1,10 +1,6 @@
-import {  IsDateString, IsNotEmpty, IsNumber } from "class-validator"
+import { IsNotEmpty, IsNumber } from "class-validator"
 
 export class CreateBookBorrowingDto {
-  @IsNotEmpty()
-  @IsDateString()
-  borrowingDate: Date
-
   @IsNotEmpty()
   @IsNumber()
   borrowingDuration: number
