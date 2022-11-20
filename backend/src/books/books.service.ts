@@ -8,14 +8,10 @@ import { UpdateBookDto } from './dto/update-book.dto';
 export class BooksService {
   constructor(private readonly prismaService: PrismaService) { }
 
-  async create({ title, author, description }: CreateBookDto): Promise<Book> {
+  async create(dto: CreateBookDto): Promise<Book> {
     try {
       const createdBook = await this.prismaService.book.create({
-        data: {
-          title,
-          author,
-          description
-        }
+        data: { ...dto }
       })
 
       return createdBook
@@ -32,8 +28,11 @@ export class BooksService {
     return await this.prismaService.book.findUnique({ where: { id } })
   }
 
-  update(id: number, updateBookDto: UpdateBookDto) {
-    return `This action updates a #${id} book`;
+  async update(id: number, updateBookDto: UpdateBookDto): Promise<Book> {
+    return await this.prismaService.book.update({
+      where: { id },
+      data: { ...updateBookDto }
+    })
   }
 
   remove(id: number) {
