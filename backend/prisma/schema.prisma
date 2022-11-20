@@ -11,10 +11,14 @@ datasource db {
 }
 
 model User {
-  id         Int             @id @default(autoincrement())
-  created_at DateTime        @default(now())
-  updated_at DateTime        @default(now())
-  borrowings BookBorrowing[]
+  id             Int             @id @default(autoincrement())
+  created_at     DateTime        @default(now())
+  updated_at     DateTime        @default(now())
+  borrowings     BookBorrowing[]
+  name           String
+  email          String          @unique
+  is_admin       Boolean         @default(false)
+  hased_password String
 
   @@map("users")
 }
