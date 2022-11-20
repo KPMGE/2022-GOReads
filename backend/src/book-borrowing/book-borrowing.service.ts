@@ -26,8 +26,8 @@ export class BookBorrowingService {
     })
   }
 
-  findAll() {
-    return `This action returns all bookBorrowing`;
+  async findAll() {
+    return await this.prismaService.bookBorrowing.findMany()
   }
 
   findOne(id: number) {
