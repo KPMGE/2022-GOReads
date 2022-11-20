@@ -26,14 +26,14 @@ export class AuthService {
     return { access_token: token }
   }
 
-  async signup(dto: SignUpDto) {
+  async signup(dto: SignUpDto): Promise<TokenDto> {
     const passwordsMatch = dto.password === dto.confirmPassword
     if (!passwordsMatch) throw new BadRequestException('password and confirmPassword must match') 
 
     const hashedPassword = await hash(dto.password)
 
     try {
-      await this.prismaService.user.create({
+      const createdUser = await this.prismaService.user.create({
         data: {
           email: dto.email,
           name: dto.name,
@@ -41,7 +41,9 @@ export class AuthService {
         }
       })
 
-      return dto
+      const token = await this.signToken(createdUser.id, createdUser.email)
+
+      return { access_token: token }
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
