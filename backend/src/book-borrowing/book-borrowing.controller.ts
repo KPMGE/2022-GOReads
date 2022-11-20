@@ -1,4 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { User } from '@prisma/client';
+import { GetUser } from 'src/auth/decorator';
+import { JwtGuard } from 'src/auth/guard';
 import { BookBorrowingService } from './book-borrowing.service';
 import { CreateBookBorrowingDto } from './dto/create-book-borrowing.dto';
 import { UpdateBookBorrowingDto } from './dto/update-book-borrowing.dto';
@@ -7,9 +10,10 @@ import { UpdateBookBorrowingDto } from './dto/update-book-borrowing.dto';
 export class BookBorrowingController {
   constructor(private readonly bookBorrowingService: BookBorrowingService) {}
 
+  @UseGuards(JwtGuard)
   @Post()
-  create(@Body() createBookBorrowingDto: CreateBookBorrowingDto) {
-    return this.bookBorrowingService.create(createBookBorrowingDto);
+  create(@GetUser() user: User, @Body() createBookBorrowingDto: CreateBookBorrowingDto) {
+    return this.bookBorrowingService.create(user.id, createBookBorrowingDto);
   }
 
   @Get()
