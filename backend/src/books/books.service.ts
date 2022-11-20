@@ -35,7 +35,9 @@ export class BooksService {
     })
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} book`;
+  async remove(id: number): Promise<Book> {
+    return await this.prismaService.book.delete({
+      where: { id }
+    })
   }
 }
