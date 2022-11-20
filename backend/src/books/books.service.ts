@@ -40,4 +40,15 @@ export class BooksService {
       where: { id }
     })
   }
+
+  async searchBook(searchItem: string): Promise<Book[]> {
+    return await this.prismaService.book.findMany({
+      where: {
+        OR: [
+          { author: { contains: searchItem } },
+          { title: { contains: searchItem } },
+        ]
+      }
+    })
+  }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, HttpCode, Query } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
@@ -6,6 +6,11 @@ import { UpdateBookDto } from './dto/update-book.dto';
 @Controller('books')
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
+
+  @Get('/search')
+  searchItem(@Query() query: { searchItem: string }) {
+    return this.booksService.searchBook(query.searchItem)
+  }
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
