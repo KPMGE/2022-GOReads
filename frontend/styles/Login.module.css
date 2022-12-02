@@ -1,0 +1,84 @@
+.container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container span {
+  color: #fff;
+  font-size: 60px;
+}
+
+.container .header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  background-color: rgba(144, 205, 249, 1);
+  border-radius: 0 0 40px 40px;
+  margin-bottom: 10px;
+}
+
+.container .main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 200px;
+}
+
+.container .inputs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.container .main input {
+  width: 100%;
+  padding: 0 10px;
+  height: 50px;
+  font-size: 18px;
+  outline-color: rgba(143, 155, 179, 1);
+  margin: 5px 0;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+}
+
+.container .main input:focus {
+  outline: none;
+}
+
+.container .main button {
+  background-color: #90CDF9;
+  width: 50%;
+  border-radius: 10px;
+  height: 50px;
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.container .main a {
+  font-size: 20px;
+  color: #21B4BD;
+  text-decoration: underline;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.container .main .innerInput {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
