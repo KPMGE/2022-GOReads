@@ -1,7 +1,10 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 200px;
   height: 250px;
-  background-color: #21B4BD;
+  background-color: 	#A0A0A0;
   border-radius: 10px;
   padding: 5px;
   overflow-wrap: break-word;
@@ -30,4 +33,14 @@
 .container p {
   text-align: center;
   color: #fff;
+}
+
+.button {
+  border-radius: 5px;
+  background-color: #21B4BD;
+  border: none;
+  width: 80px;
+  height: 40px;
+  color: #fff;
+  margin-top: 30px;
 }

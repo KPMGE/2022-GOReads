@@ -58,6 +58,8 @@
   .container .main button {
     background-color: #90CDF9;
     width: 50%;
+    border: none;
+    margin-top: 10px;
     border-radius: 10px;
     height: 50px;
     color: #fff;

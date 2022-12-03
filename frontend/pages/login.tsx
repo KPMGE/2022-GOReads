@@ -2,12 +2,12 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import Router from 'next/router'
 import Image from 'next/image'
-import styles from '../styles/Login.module.css'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { api } from '../api'
 import { alertError } from '../utils'
+import styles from '../styles/Login.module.css'
 
 export default () => {
   const handleSubmit = async (event: any) => {
