@@ -13,6 +13,10 @@ export default function NewBook() {
       description: event.target.description.value,
     }
 
+    if (!data.title) return await alertError('The title field is required!')
+    if (!data.author) return await alertError('The author field is required!')
+    if (!data.description) return await alertError('The description field is required!')
+
     try {
       const token = localStorage.getItem('token')
       await api.post('books', data, {
