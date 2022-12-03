@@ -8,7 +8,12 @@ export default () => {
 
   const getBooks = async () => {
     try {
-      const response = await api.get('books')
+      const token = localStorage.getItem('token')
+      const response = await api.get('books', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
       setBooks(response.data)
     } catch (error) {
       console.log(error)

@@ -6,19 +6,10 @@ import styles from '../styles/Login.module.css'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Swal from 'sweetalert2'
 import { api } from '../api'
+import { alertError } from '../utils'
 
 export default () => {
-
-  const alertError = async (message: string) => {
-    await Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: `${message}`
-    })
-  }
-
   const handleSubmit = async (event: any) => {
     event.preventDefault()
     const data = {

@@ -1,0 +1,40 @@
+.container {
+  width: 500px;
+  height: 350px;
+  background-color: 	#A0A0A0;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.container h1 {
+  color: #fff;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: center;
+}
+
+.form input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  outline-color: #21B4BD;
+  border-radius: 5px;
+}
+
+.form button {
+  font-size: 18px;
+  margin-top: 10px;
+  width: 200px;
+  height: 40px;
+  color: #fff;
+  border: none;
+  background-color: #21B4BD;
+  border-radius: 5px;
+}
