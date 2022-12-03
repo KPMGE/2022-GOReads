@@ -1,0 +1,33 @@
+.container {
+  width: 200px;
+  height: 250px;
+  background-color: #21B4BD;
+  border-radius: 10px;
+  padding: 5px;
+  overflow-wrap: break-word;
+  color: #fff;
+}
+
+.container h3 {
+  text-align: center;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #fff;
+}
+
+.container h4 {
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #fff;
+  overflow: hidden;
+}
+
+.container p {
+  text-align: center;
+  color: #fff;
+}
