@@ -6,6 +6,7 @@ import {faUserAlt} from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Router from 'next/router'
 import { api } from '../api'
 
 export default () => {
@@ -21,6 +22,7 @@ export default () => {
     try {
       const response = await api.post('auth/signup', data)
       localStorage.setItem('token', response.data.access_token)
+      Router.push('/list-books')
     } catch (error) {
       console.log(error)
     }

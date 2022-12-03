@@ -1,13 +1,24 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
+import Router from 'next/router'
 import Image from 'next/image'
 import styles from '../styles/Login.module.css'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Swal from 'sweetalert2'
 import { api } from '../api'
 
 export default () => {
+
+  const alertError = async (message: string) => {
+    await Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: `${message}`
+    })
+  }
+
   const handleSubmit = async (event: any) => {
     event.preventDefault()
     const data = {
@@ -15,11 +26,14 @@ export default () => {
       password: event.target.password.value,
     }
 
-    try {
-      const response = await api.post('auth/signin', data)
+    if (!data.email) return await alertError('email field is required!')
+    if (!data.password) return await alertError('password field is required!')
+
+    try {      const response = await api.post('auth/signin', data)
       localStorage.setItem('token', response.data.access_token)
-      console.log('Logged in!')
-    } catch (error) {
+       Router.push('/list-books')
+    } catch (error: any) {
+      await alertError('Invalid credentials! Try again')
       console.log(error)
     }
   }
