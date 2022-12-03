@@ -1,23 +1,24 @@
 import React from 'react'
 import Image from 'next/image'
-import styles from '../styles/Register.module.css'
+import styles from '../styles/Navbar.module.css'
 import {faUserAlt} from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export const Register = () => {
+export const Navbar = () => {
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <span>Register</span>
+      <div className={styles.rec}>
         <Image
           src="/login.svg"
           alt="Picture of the author"
           width={300}
           height={300}
         />
+        <span>GoReads</span>
       </div>
+
 
       <div className={styles.main}>
         <div className={styles.inputs}>
