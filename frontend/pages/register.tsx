@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
 import styles from '../styles/Register.module.css'
@@ -6,7 +7,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export const Register = () => {
+export default () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -40,7 +41,7 @@ export const Register = () => {
         </div>
 
         <button>Register</button>
-        <a href='#'>I have an account already</a>
+        <Link href="/">I have an account already</Link>
       </div>
     </div>
   )
