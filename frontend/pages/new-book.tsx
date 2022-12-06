@@ -1,8 +1,9 @@
 import React from 'react'
-import Router from 'next/router'
 import styles from '../styles/NewBook.module.css'
 import { api } from '../api'
 import { alertError } from '../utils'
+import Router from 'next/router';
+
 
 export default function NewBook() {
   const handleSubmit = async (event: any) => {
@@ -24,7 +25,8 @@ export default function NewBook() {
           Authorization: `Bearer ${token}`
         }
       })
-      Router.push('/list-books')
+
+      Router.reload();
     } catch (error) {
       await alertError('Something went wrong, please try again')
       console.log(error)
