@@ -4,7 +4,6 @@ import { api } from '../api'
 import { alertError } from '../utils'
 import Router from 'next/router';
 
-
 export default function NewBook() {
   const handleSubmit = async (event: any) => {
     event.preventDefault()

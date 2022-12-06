@@ -1,26 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { Book } from '../@types/book'
+import { Borrowing } from '../@types/borrowing'
 import { api } from '../api'
-import { Book } from '../components/Book'
+import { BookCard } from '../components/Book'
 import { useBooks } from '../hooks/useBooks'
 import styles from '../styles/ListBooks.module.css'
 
-type Book = {
-  id: number
-  title: string
-  description: string
-  author: string
-}
-
-type Borrowing = {
-  id: number
-  borrowing_duration: number
-  fine_per_day: number
-  user_id: number
-  book_id: number
-}
-
 export default () => {
-  // const [books, setBooks] = useState<Book[]>([])
   const { addBooks, books } = useBooks()
 
   const checkIsBorrowed = (book: Book, borrowings: Borrowing[]) => {
@@ -46,7 +32,8 @@ export default () => {
         }
       })
 
-      const filteredBooks = responseBooks.data.filter(book => !checkIsBorrowed(book, responseBorrowings.data))
+      const books = responseBooks.data as Book[]
+      const filteredBooks = books.filter(book => !checkIsBorrowed(book, responseBorrowings.data))
       addBooks(filteredBooks)
     } catch (error) {
       console.log(error)
@@ -55,11 +42,19 @@ export default () => {
 
   useEffect(() => {
     (async () => getBooks())()
-  }, [])
+  }, [books])
 
   return (
     <div className={styles.container}>
-      { books.map(book => <Book title={book.title} description={book.description} author={book.author} id={book.id} key={book.id} />) }
+      {books && books.map(book => 
+        <BookCard
+        title={book.title}
+        description={book.description}
+        author={book.author}
+        id={book.id}
+        key={book.id}
+        />
+      )}
     </div>
   )
 }

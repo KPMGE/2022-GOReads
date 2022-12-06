@@ -20,9 +20,10 @@ export default () => {
     if (!data.email) return await alertError('email field is required!')
     if (!data.password) return await alertError('password field is required!')
 
-    try {      const response = await api.post('auth/signin', data)
+    try {
+      const response = await api.post('auth/signin', data)
       localStorage.setItem('token', response.data.access_token)
-       Router.push('/list-books')
+      Router.push('/list-books')
     } catch (error: any) {
       await alertError('Invalid credentials! Try again')
       console.log(error)
@@ -45,12 +46,12 @@ export default () => {
         <form className={styles.inputs}>
           <div className={styles.innerInput}>
             <FontAwesomeIcon className={styles.icon} icon={faEnvelope} />
-            <input type='email'  placeholder='email' name='email'/>
+            <input type='email' placeholder='email' name='email' />
           </div>
 
           <div className={styles.innerInput}>
             <FontAwesomeIcon className={styles.icon} icon={faLock} />
-            <input type='text' placeholder='password' name='password'/>
+            <input type='text' placeholder='password' name='password' />
           </div>
 
           <button type='submit'>Login</button>

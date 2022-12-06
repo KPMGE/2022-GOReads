@@ -14,7 +14,7 @@ type Props = {
   description?: string
 }
 
-export const Book: React.FC<Props> = ({ id, title, author, description }) => {
+export const BookCard: React.FC<Props> = ({ id, title, author, description }) => {
   const handleBorrowBook = async () => {
     const data = {
       borrowingDuration: defaultBorrowingDuration,
