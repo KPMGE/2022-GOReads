@@ -1,18 +1,30 @@
 .container {
-  width: 500px;
-  height: 350px;
-  background-color: 	#A0A0A0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  border: 0.2px solid #8787870d;
+  padding: 5px;
   border-radius: 10px;
-  padding: 20px;
+  background: #f6f6f6;
+  border-bottom: 10px solid #54BFEB;
+  border-top: 10px solid #54BFEB;
+  transition: all 300ms ease-in-out;
+  cursor: pointer ;
+  width: 500px;
+  box-shadow: 2px 2px 20px rgba(80, 80, 80, 0.4);
 }
 
 .container h1 {
-  color: #fff;
+  color: #54BFEB;
   text-align: center;
 }
 
 .form {
   display: flex;
+  width: 100%;
+  padding: 0 20px;
   flex-direction: column;
   align-items: center;
   align-items: center;
@@ -29,12 +41,20 @@
 }
 
 .form button {
-  font-size: 18px;
-  margin-top: 10px;
-  width: 200px;
+  border-radius: 10px;
   height: 40px;
-  color: #fff;
-  border: none;
-  background-color: #21B4BD;
-  border-radius: 5px;
+  width: 150px;
+  text-align: center;
+  border: 1px solid #54BFEB;
+  cursor: pointer;
+  background-color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #54BFEB;
+  transition: all 300ms ease-in-out;
+}
+
+.form button:hover {
+  background-color: #54BFEB;
+  color: white;
 }
