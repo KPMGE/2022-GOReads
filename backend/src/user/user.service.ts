@@ -1,5 +1,5 @@
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import { BookBorrowing, User } from '@prisma/client';
 import { BookBorrowingService } from 'src/book-borrowing/book-borrowing.service';
 import { BooksService } from 'src/books/books.service';
@@ -14,6 +14,16 @@ export class UserService {
     private readonly bookBorrowingService: BookBorrowingService,
     private readonly config: ConfigService
   ) { }
+
+  async getMe(userId: number): Promise<User> {
+    const foundUser = await this.prismaService.user.findUnique({
+      where: {
+        id: userId
+      }
+    })
+    delete foundUser.hased_password
+    return foundUser
+  }
 
   async getMyBorrowings(userId: number): Promise<BookBorrowing[]> {
     return this.prismaService.bookBorrowing.findMany({
