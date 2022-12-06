@@ -1,10 +1,12 @@
 import React from 'react'
 import styles from '../styles/NewBook.module.css'
-import { api } from '../api'
 import { alertError } from '../utils'
 import Router from 'next/router';
+import { useBooks } from '../hooks/useBooks';
 
 export default function NewBook() {
+  const { addBook } = useBooks()
+
   const handleSubmit = async (event: any) => {
     event.preventDefault()
     const data = {
@@ -17,19 +19,8 @@ export default function NewBook() {
     if (!data.author) return await alertError('The author field is required!')
     if (!data.description) return await alertError('The description field is required!')
 
-    try {
-      const token = localStorage.getItem('token')
-      await api.post('books', data, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-
-      Router.reload();
-    } catch (error) {
-      await alertError('Something went wrong, please try again')
-      console.log(error)
-    }
+    await addBook(data)
+    Router.push('/list-books');
   }
 
   return (

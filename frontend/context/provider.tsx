@@ -1,12 +1,13 @@
 import React, { createContext, useState, useEffect } from "react"
 import { api } from "../api"
+import { alertError } from "../utils";
 
 type Props = {
   children: JSX.Element;
 };
 
 type Book = {
-  id: number
+  id?: number
   title: string
   description: string
   author: string
@@ -18,14 +19,16 @@ interface ValueTypes {
   error: boolean;
   deleteBook: (book: Book) => void
   addBooks: (books: Book[]) => void
+  addBook: (newBook: Book) => Promise<void>
 }
 
 const defaultObject: ValueTypes = {
   books: [],
   error: false,
   loading: false,
-  addBooks: (books: Book[]) => {},
-  deleteBook: (book: Book) => {}
+  addBooks: (_: Book[]) => {},
+  deleteBook: (_: Book) => {},
+  addBook: async (_: Book) =>  {}
 }
 
 export const BooksContext = createContext<ValueTypes>(defaultObject)
@@ -42,6 +45,22 @@ export const BooksProvider: React.FC<Props> = ({ children }) => {
 
   const addBooks = (books: Book[]) => {
     setBooks(books)
+  }
+
+  const addBook = async (newBook: Book): Promise<void> => {
+    try {
+      const token = localStorage.getItem('token')
+      await api.post('books', newBook, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+    } catch (error) {
+      await alertError('Something went wrong, please try again')
+      console.log(error)
+    }
+
+    setBooks([...books, newBook])
   }
 
   useEffect(() => {
@@ -68,7 +87,7 @@ export const BooksProvider: React.FC<Props> = ({ children }) => {
   }, [])
 
   return (
-    <BooksContext.Provider value={{ books, loading, error, deleteBook, addBooks }}>
+    <BooksContext.Provider value={{ books, loading, error, deleteBook, addBooks, addBook }}>
       {children}
     </BooksContext.Provider>
   )
