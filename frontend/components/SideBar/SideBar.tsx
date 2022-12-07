@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { animated } from "react-spring";
 import { useAnimation } from "./useAnimation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faPlusCircle, faHome, faList, faMoneyBill, faPenFancy } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faPlusCircle, faList, faMoneyBill, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import styles from '../../styles/Sidebar.module.css'
 import { useUser } from "../../hooks/useUser";
 import Router from 'next/router'
@@ -41,7 +41,7 @@ export const SideBar = () => {
     Router.push('/new-book')
   }
 
-  const handleGoHome = (event: any) => {
+  const handleLogout = (event: any) => {
     event.preventDefault()
     Router.push('/')
   }
@@ -55,9 +55,9 @@ export const SideBar = () => {
       </animated.div>
 
       <animated.div className={styles.sidebar} style={animatedStyles.sidebar}>
-        <div onClick={ handleGoHome } className={styles.iconfunction}>
-          <FontAwesomeIcon className={styles.icon} icon={faHome} />
-          <h4>Home</h4>
+        <div onClick={ handleLogout } className={styles.iconfunction}>
+          <FontAwesomeIcon className={styles.icon} icon={faArrowLeft} />
+          <h4>Logout</h4>
         </div>
 
         {user?.is_admin && (

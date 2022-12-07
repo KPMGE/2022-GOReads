@@ -66,6 +66,7 @@
     text-decoration: underline;
   }
   .icon {
+    color: var(--blue);
     width: 20px;
     height: 20px;
   }
