@@ -5,11 +5,13 @@ import Image from 'next/image'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { api } from '../api'
 import { alertError } from '../utils'
 import styles from '../styles/Login.module.css'
+import { useUser } from '../hooks/useUser'
 
 export default () => {
+  const { login } = useUser()
+
   const handleSubmit = async (event: any) => {
     event.preventDefault()
     const data = {
@@ -19,15 +21,9 @@ export default () => {
 
     if (!data.email) return await alertError('email field is required!')
     if (!data.password) return await alertError('password field is required!')
-
-    try {
-      const response = await api.post('auth/signin', data)
-      localStorage.setItem('token', response.data.access_token)
-      Router.push('/list-books')
-    } catch (error: any) {
-      await alertError('Invalid credentials! Try again')
-      console.log(error)
-    }
+    
+    await login(data.email, data.password)
+    Router.push('/list-books')
   }
 
   return (

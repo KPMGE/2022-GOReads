@@ -7,7 +7,7 @@
 }
 
 .container span {
-  color: #fff;
+  color: var(--white);
   font-size: 60px;
 }
 
@@ -56,20 +56,20 @@
 }
 
 .container .main button {
-  background-color: #90CDF9;
+  background-color: var(--blue);
   border: none;
   margin-top: 15px;
   width: 50%;
   border-radius: 10px;
   height: 50px;
-  color: #fff;
+  color: var(--white);
   font-size: 20px;
   margin-bottom: 10px;
 }
 
 .container .main a {
   font-size: 20px;
-  color: #21B4BD;
+  color: var(--blue);
   text-decoration: underline;
 }
 

@@ -5,8 +5,8 @@
 }
 
 .sidebar {
-  color: #fff;
-  background: #27ab83;
+  color: var(--white);
+  background: var(--blue);
   min-height: 100vh;
   height: 100%;
   width: 300px;
@@ -24,8 +24,8 @@
 .btn {
   padding: 7px 14px;
   color: #effcf6;
-  background-color: #27ab83;
-  border-color: #27ab83;
+  background-color: var(--blue);
+  border-color: var(--blue);
   border-style: solid;
   border-radius: 4px;
   border-width: 1px;
@@ -37,12 +37,28 @@
   align-items: center;
   line-height: 1.2;
   position: absolute;
-  top: 20px;
-  left: 40px;
+  top: 0px;
+  left: 0px;
   z-index: 10;
 }
 
+.iconfunction {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.iconfunction:hover {
+  color: #000066;
+  cursor: pointer;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+}
 .btn:hover {
-  background-color: #147d64;
-  border-color: #147d64;
+  background-color: var(--blue);
+  border-color: var(--blue);
 }

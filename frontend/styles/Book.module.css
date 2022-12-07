@@ -4,12 +4,12 @@
   align-items: center;
   justify-content: center;
   margin: 10px;
-  border: 0.2px solid #8787870d;
+  border: 0.2px solid var(--grey);
   padding: 5px;
   border-radius: 10px;
   background: #f6f6f6;
-  border-bottom: 10px solid #54BFEB;
-  border-top: 10px solid #54BFEB;
+  border-bottom: 10px solid var(--blue);
+  border-top: 10px solid var(--blue);
   transition: all 300ms ease-in-out;
   cursor: pointer ;
   width: 230px;
@@ -38,16 +38,16 @@
   height: 30px;
   width: 80px;
   text-align: center;
-  border: 1px solid #54BFEB;
+  border: 1px solid var(--blue);
   cursor: pointer;
-  background-color: white;
+  background-color: var(--white);
   font-weight: 600;
   font-size: 0.8rem;
-  color: #54BFEB;
+  color: var(--blue);
   transition: all 300ms ease-in-out;
 }
 
 .item button:hover {
-  background-color: #54BFEB;
-  color: white;
+  background-color: var(--blue);
+  color: var(--white);
 }

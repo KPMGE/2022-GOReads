@@ -1,6 +1,5 @@
 import { useSpring, to } from "react-spring";
 
-
 const DEFAULT_WIDTH = 200;
 
 export function useAnimation(isOpen: boolean) {

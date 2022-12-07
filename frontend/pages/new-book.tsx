@@ -20,19 +20,24 @@ export default function NewBook() {
     if (!data.description) return await alertError('The description field is required!')
 
     await addBook(data)
+
+    const LOCAL_STORAGE_KEY = "isSidebarOpen";
+    localStorage.setItem(LOCAL_STORAGE_KEY, 'false')
     Router.push('/list-books');
   }
 
   return (
     <div className={styles.container}>
-      <h1>NEW BOOK</h1>
-      <form onSubmit={ handleSubmit } className={styles.form}>
-        <input type='text' placeholder='Title' name='title' />
-        <input type='text' placeholder='Author' name='author' />
-        <input type='text' placeholder='Description' name='description' />
+      <div className={styles.card}>
+        <h1>NEW BOOK</h1>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <input type='text' placeholder='Title' name='title' />
+          <input type='text' placeholder='Author' name='author' />
+          <input type='text' placeholder='Description' name='description' />
 
-        <button>Save</button>
-      </form>
+          <button>Save</button>
+        </form>
+      </div>
     </div>
   )
 }

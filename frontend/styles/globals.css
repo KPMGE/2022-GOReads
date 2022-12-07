@@ -24,3 +24,9 @@ a {
     background: black;
   }
 }
+
+:root {
+  --blue: #54BFEB;
+  --white: #ffffff;
+  --grey: #8787870d;
+}
