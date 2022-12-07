@@ -9,6 +9,6 @@ executing the following command:
 sudo docker-compose up 
 ```
 
-## How do use the api?
+## How do i use the api?
 If you wanna know exactly what features you got on the api,
 you can refer to the [api documentation](https://github.com/dwws-ufes/2022-GOReads/tree/main/backend/documentation) and see more :)
