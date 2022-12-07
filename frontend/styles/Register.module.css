@@ -5,23 +5,21 @@
     flex-direction: column;
     align-items: center;
   }
-  
   .container span {
-    color: #fff;
+    color: var(--white);
     font-size: 60px;
   }
-  
   .container .header {
     display: flex;
+    height: 300px;
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
     width: 100%;
-    background-color: rgba(144, 205, 249, 1);
+    background-color: var(--blue);
     border-radius: 0 0 40px 40px;
     margin-bottom: 10px;
   }
-  
   .container .main {
     display: flex;
     align-items: center;
@@ -29,7 +27,6 @@
     width: 100%;
     padding: 0 200px;
   }
-  
   .container .inputs {
     display: flex;
     flex-direction: column;
@@ -37,7 +34,6 @@
     align-items: center;
     margin-bottom: 10px;
   }
-  
   .container .main input {
     width: 100%;
     padding: 0 10px;
@@ -50,38 +46,31 @@
     border-left-style: hidden;
     border-bottom-style: groove;
   }
-  
   .container .main input:focus {
     outline: none;
   }
-  
   .container .main button {
-    background-color: #90CDF9;
+    background-color: var(--blue);
     width: 50%;
     border: none;
     margin-top: 10px;
     border-radius: 10px;
     height: 50px;
-    color: #fff;
+    color: var(--white);
     font-size: 20px;
     margin-bottom: 10px;
   }
-  
   .container .main a {
     font-size: 20px;
-    color: #21B4BD;
+    color: var(--blue);
     text-decoration: underline;
   }
-  
   .icon {
     width: 20px;
     height: 20px;
   }
-  
   .container .main .innerInput {
     width: 100%;
     display: flex;
     align-items: center;
   }
-  
-  
