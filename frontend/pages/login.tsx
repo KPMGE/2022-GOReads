@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React from 'react'
 import Router from 'next/router'
 import Image from 'next/image'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
@@ -9,7 +9,7 @@ import { alertError } from '../utils'
 import styles from '../styles/Login.module.css'
 import { useUser } from '../hooks/useUser'
 
-export default () => {
+const LoginPage = () => {
   const { login } = useUser()
 
   const handleSubmit = async (event: any) => {
@@ -56,9 +56,11 @@ export default () => {
           </div>
 
           <button type='submit'>Login</button>
-          <Link href="/register">I don't have an account</Link>
+          <Link href="/register">I don&apos;t have an account</Link>
         </form>
       </div>
     </div>
   )
 }
+
+export default LoginPage;

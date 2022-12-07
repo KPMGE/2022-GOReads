@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Router from 'next/router'
 import { api } from '../api'
 
-export default () => {
+const Register = () => {
   const handleSubmit = async (event: any) => {
     event.preventDefault()
     const data = {
@@ -66,3 +66,5 @@ export default () => {
     </div>
   )
 }
+
+export default Register;

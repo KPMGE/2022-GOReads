@@ -1,6 +1,10 @@
 import React, { createContext, useState, useEffect } from "react"
+import { Borrowing } from "../@types/borrowing";
 import { api } from "../api"
 import { alertError } from "../utils";
+
+const defaultBorrowingDuration = 10
+const defaultFinePerDay = 1.0
 
 type Props = {
   children: JSX.Element;
@@ -15,32 +19,49 @@ type Book = {
 
 interface ValueTypes {
   books: Book[] | null;
-  loading: boolean;
-  error: boolean;
-  deleteBook: (book: Book) => void
   addBooks: (books: Book[]) => void
   addBook: (newBook: Book) => Promise<void>
+  borrowBook: (bookId: number) =>  Promise<void>
 }
 
 const defaultObject: ValueTypes = {
   books: [],
-  error: false,
-  loading: false,
   addBooks: (_: Book[]) => {},
-  deleteBook: (_: Book) => {},
-  addBook: async (_: Book) =>  {}
+  addBook: async (_: Book) =>  {},
+  borrowBook: async (_: number) =>  {}
 }
 
 export const BooksContext = createContext<ValueTypes>(defaultObject)
 
 export const BooksProvider: React.FC<Props> = ({ children }) => {
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<boolean>(false)
   const [books, setBooks] = useState<Book[]>([])
 
-  const deleteBook = (book: Book) => {
-    console.log('deleteBook', book)
-    return null
+  const checkIsBorrowed = (book: Book, borrowings: Borrowing[]) => {
+    for (const borrowing of borrowings) {
+      if (book.id === borrowing.book_id) return true
+    }
+    return false
+  }
+
+  const getBooks = async (): Promise<Book[]> => {
+    const token = localStorage.getItem('token')
+    const response = await api.get('books', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return response.data
+  }
+
+  const getBookBorrowings = async (): Promise<Borrowing[]> => {
+    const token = localStorage.getItem('token')
+    const responseBorrowings = await api.get('user/myBorrowings', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return responseBorrowings.data
   }
 
   const addBooks = (books: Book[]) => {
@@ -63,23 +84,38 @@ export const BooksProvider: React.FC<Props> = ({ children }) => {
     setBooks([...books, newBook])
   }
 
+  const borrowBook = async (bookId: number) => {
+    const token = localStorage.getItem('token')
+    const data = {
+      borrowingDuration: defaultBorrowingDuration,
+      finePerDay: defaultFinePerDay,
+      bookId
+    }
+
+    await api.post('book-borrowing', data, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    console.log(`Book ${bookId} borrowed!`)
+
+    const books = await getBooks()
+    const borrowings = await getBookBorrowings()
+    const filteredBooks = books.filter(book => !checkIsBorrowed(book, borrowings))
+    setBooks(filteredBooks)
+  }
+
+
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const token = localStorage.getItem('token')
-        const response = await api.get('books', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
-
-        // set fetched books
-        setBooks(response.data)
-
-        setLoading(false)
+        const books = await getBooks()
+        const borrowings = await getBookBorrowings()
+        const filteredBooks = books.filter(book => !checkIsBorrowed(book, borrowings))
+        setBooks(filteredBooks)
       } catch (err) {
         console.log("Error")
-        setError(true)
       }
     }
 
@@ -87,7 +123,7 @@ export const BooksProvider: React.FC<Props> = ({ children }) => {
   }, [])
 
   return (
-    <BooksContext.Provider value={{ books, loading, error, deleteBook, addBooks, addBook }}>
+    <BooksContext.Provider value={{ books, addBooks, addBook, borrowBook }}>
       {children}
     </BooksContext.Provider>
   )

@@ -1,12 +1,9 @@
 import React from 'react'
-import Router from 'next/router'
 import Image from 'next/image'
-import { api } from '../../api'
 import styles from '../../styles/Book.module.css'
 import { alertError } from '../../utils'
+import { useBooks } from '../../hooks/useBooks'
 
-const defaultBorrowingDuration = 10
-const defaultFinePerDay = 1.0
 
 type Props = {
   id: number
@@ -16,22 +13,11 @@ type Props = {
 }
 
 export const BookCard: React.FC<Props> = ({ id, title, author, description }) => {
-  const handleBorrowBook = async () => {
-    const data = {
-      borrowingDuration: defaultBorrowingDuration,
-      finePerDay: defaultFinePerDay,
-      bookId: id
-    }
+  const { borrowBook } = useBooks()
 
-    const token = localStorage.getItem('token')
+  const handleBorrowBook = async () => {
     try {
-      await api.post('book-borrowing', data, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      console.log(`Book ${id} borrowed!`)
-      Router.push('/list-books')
+      await borrowBook(id)
     } catch (error) {
       await alertError('Something went wrong, please try again')
       console.log(error)
