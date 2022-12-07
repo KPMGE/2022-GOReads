@@ -22,8 +22,13 @@ export default () => {
     if (!data.email) return await alertError('email field is required!')
     if (!data.password) return await alertError('password field is required!')
     
-    await login(data.email, data.password)
-    Router.push('/list-books')
+    try {      
+      await login(data.email, data.password)
+      Router.push('/list-books')
+    } catch (error) {
+      await alertError('Invalid credentials! Try again')
+      console.log(error)
+    }
   }
 
   return (

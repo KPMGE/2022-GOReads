@@ -39,15 +39,10 @@ export const UserProvider: React.FC<Props> = ({ children }) => {
       email,
       password
     }
-    try {
-      const response = await api.post('auth/signin', data)
-      localStorage.setItem('token', response.data.access_token)
-      const user = await getUser()
-      setUser(user)
-    } catch (error: any) {
-      await alertError('Invalid credentials! Try again')
-      console.log(error)
-    }
+    const response = await api.post('auth/signin', data)
+    localStorage.setItem('token', response.data.access_token)
+    const user = await getUser()
+    setUser(user)
   }
 
   useEffect(() => {
