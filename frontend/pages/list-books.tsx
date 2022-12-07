@@ -2,10 +2,12 @@ import React from 'react'
 import { BookCard } from '../components/Book'
 import { SideBar } from '../components/SideBar/SideBar'
 import { useBooks } from '../hooks/useBooks'
+import { useUser } from '../hooks/useUser'
 import styles from '../styles/ListBooks.module.css'
 
 const ListBooks = () => {
   const { books } = useBooks()
+  const { user } = useUser()
 
   return (
     <>
@@ -21,6 +23,7 @@ const ListBooks = () => {
         description={book.description}
         author={book.author}
         id={book.id as number}
+        showBorrowButton={!user?.is_admin}
         key={book.id}
         />
       )}

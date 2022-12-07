@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect } from "react"
 import { Borrowing } from "../@types/borrowing";
 import { api } from "../api"
-import { alertError } from "../utils";
 
 const defaultBorrowingDuration = 10
 const defaultFinePerDay = 1.0
@@ -72,18 +71,12 @@ export const BooksProvider: React.FC<Props> = ({ children }) => {
   }
 
   const addBook = async (newBook: Book): Promise<void> => {
-    try {
-      const token = localStorage.getItem('token')
-      await api.post('books', newBook, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-    } catch (error) {
-      await alertError('Something went wrong, please try again')
-      console.log(error)
-    }
-
+    const token = localStorage.getItem('token')
+    await api.post('books', newBook, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
     setBooks([...books, newBook])
   }
 
@@ -105,8 +98,10 @@ export const BooksProvider: React.FC<Props> = ({ children }) => {
 
     const books = await getBooks()
     const borrowings = await getBookBorrowings()
-    const filteredBooks = books.filter(book => !checkIsBorrowed(book, borrowings))
-    setBooks(filteredBooks)
+    const notBorrowedBooks = books.filter(book => !checkIsBorrowed(book, borrowings))
+    const borrowedBooks = books.filter(book => checkIsBorrowed(book, borrowings))
+    setBooks(notBorrowedBooks) 
+    setBorrowedBooks(borrowedBooks)
   }
 
   useEffect(() => {

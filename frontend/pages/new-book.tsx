@@ -19,7 +19,11 @@ export default function NewBook() {
     if (!data.author) return await alertError('The author field is required!')
     if (!data.description) return await alertError('The description field is required!')
 
-    await addBook(data)
+    try {
+      await addBook(data)
+    } catch (error) {
+      await alertError('Error when saving book, please try again!')
+    }
 
     const LOCAL_STORAGE_KEY = "isSidebarOpen";
     localStorage.setItem(LOCAL_STORAGE_KEY, 'false')

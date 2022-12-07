@@ -4,15 +4,15 @@ import styles from '../../styles/Book.module.css'
 import { alertError } from '../../utils'
 import { useBooks } from '../../hooks/useBooks'
 
-
 type Props = {
   id: number
+  showBorrowButton?: boolean
   title: string
   author: string
   description?: string
 }
 
-export const BookCard: React.FC<Props> = ({ id, title, author, description }) => {
+export const BookCard: React.FC<Props> = ({ id, title, author, description, showBorrowButton = true }) => {
   const { borrowBook } = useBooks()
 
   const handleBorrowBook = async () => {
@@ -38,7 +38,7 @@ export const BookCard: React.FC<Props> = ({ id, title, author, description }) =>
         <p className={styles.about}>
           {description}
         </p>
-        <button onClick={handleBorrowBook}>Borrow</button>
+        {showBorrowButton && <button onClick={handleBorrowBook}>Borrow</button>}
       </div>
     </div>
   )

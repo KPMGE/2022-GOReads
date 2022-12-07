@@ -21,6 +21,7 @@ const ListBooks = () => {
         description={book.description}
         author={book.author}
         id={book.id as number}
+        showBorrowButton={false}
         key={book.id}
         />
       )}

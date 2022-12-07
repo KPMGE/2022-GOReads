@@ -36,26 +36,28 @@ export const SideBar = () => {
   const animatedStyles = useAnimation(isOpen);
   const { user } = useUser()
 
-  const handleAddBook = (event: any) => {
-    event.preventDefault()
-    Router.push('/new-book')
-  }
-
-  const handleLogout = (event: any) => {
-    event.preventDefault()
-    Router.push('/')
-  }
-
-  const handleBorrowings = (event: any) => {
+  const handleAddBook = async (event: any) => {
     event.preventDefault()
     localStorage.setItem(LOCAL_STORAGE_KEY, "false")
-    Router.push('/borrowed-books')
+    await Router.push('/new-book')
   }
 
-  const handleGoHome = (event: any) => {
+  const handleLogout = async (event: any) => {
     event.preventDefault()
     localStorage.setItem(LOCAL_STORAGE_KEY, "false")
-    Router.push('/list-books')
+    await Router.push('/')
+  }
+
+  const handleBorrowings = async (event: any) => {
+    event.preventDefault()
+    localStorage.setItem(LOCAL_STORAGE_KEY, "false")
+    await Router.push('/borrowed-books')
+  }
+
+  const handleGoHome = async (event: any) => {
+    event.preventDefault()
+    localStorage.setItem(LOCAL_STORAGE_KEY, "false")
+    await Router.push('/list-books')
   }
 
   return (
