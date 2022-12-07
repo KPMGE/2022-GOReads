@@ -14,5 +14,25 @@ services:
       retries: 20
     environment: 
       POSTGRES_DB: goreads
-      POSTGRES_USER: root
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
+    networks: 
+      - goreads_net
+
+  api: 
+    build: .
+    container_name: goreads_api
+    depends_on:
+      db: 
+        condition: service_healthy
+    ports:
+      - 3333:3333
+    environment: 
+      DATABASE_URL: postgresql://postgres:1234@db:5432/goreads?schema=public
+      JWT_SECRET: jwt_secret
+    networks: 
+      - goreads_net
+
+networks:
+  goreads_net: 
+    driver: bridge
