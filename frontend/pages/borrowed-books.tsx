@@ -5,17 +5,17 @@ import { useBooks } from '../hooks/useBooks'
 import styles from '../styles/ListBooks.module.css'
 
 const ListBooks = () => {
-  const { books } = useBooks()
+  const { borrowedBooks } = useBooks()
 
   return (
     <>
     <header className={styles.header}>
       <SideBar />
-      <h1>Books</h1>
+      <h1>Borrowed Books</h1>
     </header>
 
     <div className={styles.container}>
-      {books && books.map(book => 
+      {borrowedBooks && borrowedBooks.map(book => 
         <BookCard
         title={book.title}
         description={book.description}

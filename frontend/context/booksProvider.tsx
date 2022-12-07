@@ -18,7 +18,8 @@ type Book = {
 }
 
 interface ValueTypes {
-  books: Book[] | null;
+  books?: Book[];
+  borrowedBooks?: Book[];
   addBooks: (books: Book[]) => void
   addBook: (newBook: Book) => Promise<void>
   borrowBook: (bookId: number) =>  Promise<void>
@@ -26,6 +27,7 @@ interface ValueTypes {
 
 const defaultObject: ValueTypes = {
   books: [],
+  borrowedBooks: [],
   addBooks: (_: Book[]) => {},
   addBook: async (_: Book) =>  {},
   borrowBook: async (_: number) =>  {}
@@ -35,6 +37,7 @@ export const BooksContext = createContext<ValueTypes>(defaultObject)
 
 export const BooksProvider: React.FC<Props> = ({ children }) => {
   const [books, setBooks] = useState<Book[]>([])
+  const [borrowedBooks, setBorrowedBooks] = useState<Book[]>([])
 
   const checkIsBorrowed = (book: Book, borrowings: Borrowing[]) => {
     for (const borrowing of borrowings) {
@@ -106,14 +109,15 @@ export const BooksProvider: React.FC<Props> = ({ children }) => {
     setBooks(filteredBooks)
   }
 
-
   useEffect(() => {
     const fetchBooks = async () => {
       try {
         const books = await getBooks()
         const borrowings = await getBookBorrowings()
-        const filteredBooks = books.filter(book => !checkIsBorrowed(book, borrowings))
-        setBooks(filteredBooks)
+        const notBorrowedBooks = books.filter(book => !checkIsBorrowed(book, borrowings))
+        const borrowedBooks = books.filter(book => checkIsBorrowed(book, borrowings))
+        setBooks(notBorrowedBooks) 
+        setBorrowedBooks(borrowedBooks)
       } catch (err) {
         console.log("Error")
       }
@@ -123,7 +127,7 @@ export const BooksProvider: React.FC<Props> = ({ children }) => {
   }, [])
 
   return (
-    <BooksContext.Provider value={{ books, addBooks, addBook, borrowBook }}>
+    <BooksContext.Provider value={{ books, addBooks, addBook, borrowBook, borrowedBooks }}>
       {children}
     </BooksContext.Provider>
   )

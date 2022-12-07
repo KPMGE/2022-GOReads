@@ -2,7 +2,7 @@ import React from "react";
 import { animated } from "react-spring";
 import { useAnimation } from "./useAnimation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faPlusCircle, faList, faMoneyBill, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faPlusCircle, faList, faMoneyBill, faArrowLeft, faHome } from '@fortawesome/free-solid-svg-icons'
 import styles from '../../styles/Sidebar.module.css'
 import { useUser } from "../../hooks/useUser";
 import Router from 'next/router'
@@ -46,6 +46,18 @@ export const SideBar = () => {
     Router.push('/')
   }
 
+  const handleBorrowings = (event: any) => {
+    event.preventDefault()
+    localStorage.setItem(LOCAL_STORAGE_KEY, "false")
+    Router.push('/borrowed-books')
+  }
+
+  const handleGoHome = (event: any) => {
+    event.preventDefault()
+    localStorage.setItem(LOCAL_STORAGE_KEY, "false")
+    Router.push('/list-books')
+  }
+
   return (
     <div className="app">
       <animated.div className={styles.main} style={animatedStyles.main}>
@@ -55,23 +67,31 @@ export const SideBar = () => {
       </animated.div>
 
       <animated.div className={styles.sidebar} style={animatedStyles.sidebar}>
-        <div onClick={ handleLogout } className={styles.iconfunction}>
+        <div onClick={handleLogout} className={styles.iconfunction}>
           <FontAwesomeIcon className={styles.icon} icon={faArrowLeft} />
           <h4>Logout</h4>
         </div>
 
+        <div onClick={handleGoHome} className={styles.iconfunction}>
+          <FontAwesomeIcon className={styles.icon} icon={faHome} />
+          <h4>Livros</h4>
+        </div>
+
         {user?.is_admin && (
-          <div onClick={ handleAddBook } className={styles.iconfunction}>
+          <div onClick={handleAddBook} className={styles.iconfunction}>
             <FontAwesomeIcon className={styles.icon} icon={faPlusCircle} />
             <h4>Adicionar Livro</h4>
           </div>
         )
         }
 
-        <div className={styles.iconfunction}>
-          <FontAwesomeIcon className={styles.icon} icon={faList} />
-          <h4>Empréstimos</h4>
-        </div>
+        {!user?.is_admin && (
+          <div onClick={handleBorrowings} className={styles.iconfunction}>
+            <FontAwesomeIcon className={styles.icon} icon={faList} />
+            <h4>Empréstimos</h4>
+          </div>
+        )}
+
         <div className={styles.iconfunction}>
           <FontAwesomeIcon className={styles.icon} icon={faMoneyBill} />
           <h4>Multas</h4>
