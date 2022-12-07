@@ -41,6 +41,11 @@ export const SideBar = () => {
     Router.push('/new-book')
   }
 
+  const handleGoHome = (event: any) => {
+    event.preventDefault()
+    Router.push('/')
+  }
+
   return (
     <div className="app">
       <animated.div className={styles.main} style={animatedStyles.main}>
@@ -50,7 +55,7 @@ export const SideBar = () => {
       </animated.div>
 
       <animated.div className={styles.sidebar} style={animatedStyles.sidebar}>
-        <div className={styles.iconfunction}>
+        <div onClick={ handleGoHome } className={styles.iconfunction}>
           <FontAwesomeIcon className={styles.icon} icon={faHome} />
           <h4>Home</h4>
         </div>
