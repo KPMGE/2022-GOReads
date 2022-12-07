@@ -60,7 +60,7 @@ const Table = () => {
           </tr>
 
           {borrowedBooks && borrowedBooks.map(book => (
-            <tr>
+            <tr key={book.id}>
               <td className={styles.td}>{book.title}</td>
               <td className={styles.td}>{formatDate(book.created_at)}</td>
               <td className={styles.td}>{formatFineDate(book.created_at)}</td>

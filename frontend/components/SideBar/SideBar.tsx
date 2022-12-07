@@ -60,6 +60,12 @@ export const SideBar = () => {
     await Router.push('/list-books')
   }
 
+  const handleGoFines = async (event: any) => {
+    event.preventDefault()
+    localStorage.setItem(LOCAL_STORAGE_KEY, "false")
+    await Router.push('/fines')
+  }
+
   return (
     <div className="app">
       <animated.div className={styles.main} style={animatedStyles.main}>
@@ -94,10 +100,12 @@ export const SideBar = () => {
           </div>
         )}
 
-        <div className={styles.iconfunction}>
-          <FontAwesomeIcon className={styles.icon} icon={faMoneyBill} />
-          <h4>Fines</h4>
-        </div>
+        {!user?.is_admin && (
+          <div onClick={handleGoFines} className={styles.iconfunction}>
+            <FontAwesomeIcon className={styles.icon} icon={faMoneyBill} />
+            <h4>Fines</h4>
+          </div>
+        )}
       </animated.div>
     </div>
   );
