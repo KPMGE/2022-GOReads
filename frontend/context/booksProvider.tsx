@@ -1,20 +1,14 @@
 import React, { createContext, useState, useEffect } from "react"
+import { Book } from "../@types/book";
 import { Borrowing } from "../@types/borrowing";
 import { api } from "../api"
 
-const defaultBorrowingDuration = 10
+const defaultBorrowingDuration = 0
 const defaultFinePerDay = 1.0
 
 type Props = {
   children: JSX.Element;
 };
-
-type Book = {
-  id?: number
-  title: string
-  description: string
-  author: string
-}
 
 interface ValueTypes {
   books?: Book[];

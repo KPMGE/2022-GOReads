@@ -76,13 +76,13 @@ export const SideBar = () => {
 
         <div onClick={handleGoHome} className={styles.iconfunction}>
           <FontAwesomeIcon className={styles.icon} icon={faHome} />
-          <h4>Livros</h4>
+          <h4>Books</h4>
         </div>
 
         {user?.is_admin && (
           <div onClick={handleAddBook} className={styles.iconfunction}>
             <FontAwesomeIcon className={styles.icon} icon={faPlusCircle} />
-            <h4>Adicionar Livro</h4>
+            <h4>Add a book</h4>
           </div>
         )
         }
@@ -90,13 +90,13 @@ export const SideBar = () => {
         {!user?.is_admin && (
           <div onClick={handleBorrowings} className={styles.iconfunction}>
             <FontAwesomeIcon className={styles.icon} icon={faList} />
-            <h4>Empréstimos</h4>
+            <h4>Borrowings</h4>
           </div>
         )}
 
         <div className={styles.iconfunction}>
           <FontAwesomeIcon className={styles.icon} icon={faMoneyBill} />
-          <h4>Multas</h4>
+          <h4>Fines</h4>
         </div>
       </animated.div>
     </div>
