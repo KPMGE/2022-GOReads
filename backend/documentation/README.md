@@ -14,8 +14,8 @@ JWT_SECRET: jwt_secret
 --- 
 
 ### How to generate api route docs.
-You can easily generate your api route docs. First of all, inside this folder, you're need to run the command below, make sure you've got
-npx on your machine.
+You can easily generate your api route docs. First of all, inside this folder, run the command below, make sure you've got
+npx installed on your machine.
 
 ```bash
 npx insomnia-documenter --config ./api-doc.json
