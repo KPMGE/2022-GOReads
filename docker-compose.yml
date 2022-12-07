@@ -20,7 +20,7 @@ services:
       - goreads_net
 
   api: 
-    build: .
+    build: ./backend
     container_name: goreads_api
     depends_on:
       db: 
@@ -30,6 +30,19 @@ services:
     environment: 
       DATABASE_URL: postgresql://postgres:1234@db:5432/goreads?schema=public
       JWT_SECRET: jwt_secret
+    networks: 
+      - goreads_net
+
+  web: 
+    build: ./frontend
+    container_name: goreads_web
+    depends_on:
+      - api
+      - db
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/goreads
     networks: 
       - goreads_net
 
