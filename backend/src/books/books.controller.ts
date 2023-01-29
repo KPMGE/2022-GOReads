@@ -42,6 +42,6 @@ export class BooksController {
 
   @Get('/dbpedia/:bookTitle')
   fetchBookFromDbpedia(@Param('bookTitle') bookTitle: string) {
-    return this.booksService.fetchBookDescriptionFromDbpedia(bookTitle);
+    return this.booksService.fetchBookFromDbpedia(bookTitle);
   }
 }
