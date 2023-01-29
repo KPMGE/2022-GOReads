@@ -20,8 +20,8 @@
   border-top: 10px solid var(--blue);
   transition: all 300ms ease-in-out;
   cursor: pointer ;
-  width: 600px;
-  height: 400px;
+  width: 650px;
+  height: 500px;
   box-shadow: 2px 2px 20px rgba(80, 80, 80, 0.4);
 }
 
@@ -44,6 +44,17 @@
   margin: 10px 0;
   padding: 10px;
   font-size: 16px;
+  border: none;
+  outline-color: var(--blue);
+  border-radius: 5px;
+}
+
+.form textarea {
+  width: 100%;
+  margin: 10px 0;
+  height: 160px;
+  padding: 10px;
+  font-size: 14px;
   border: none;
   outline-color: var(--blue);
   border-radius: 5px;

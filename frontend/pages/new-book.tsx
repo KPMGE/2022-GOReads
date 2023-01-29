@@ -1,11 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from '../styles/NewBook.module.css'
 import { alertError } from '../utils'
 import Router from 'next/router';
 import { useBooks } from '../hooks/useBooks';
+import { api } from '../api';
 
 export default function NewBook() {
   const { addBook } = useBooks()
+  const [description, setDescription] = useState<string>('')
+  const [author, setAuthor] = useState<string>('')
+  const [title, setTitle] = useState<string>('')
+
+  const fetchBookFromDbpedia = async (bookTitle: string) => {
+    console.log('here: ', bookTitle)
+    if (bookTitle === '') return 
+
+    const response = await api.get(`books/dbpedia/${bookTitle}`)
+    const { description, author } = response.data
+    setDescription(description)
+    setAuthor(author)
+  }
 
   const handleSubmit = async (event: any) => {
     event.preventDefault()
@@ -35,9 +49,24 @@ export default function NewBook() {
       <div className={styles.card}>
         <h1>NEW BOOK</h1>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <input type='text' placeholder='Title' name='title' />
-          <input type='text' placeholder='Author' name='author' />
-          <input type='text' placeholder='Description' name='description' />
+          <input 
+            type='text'
+            onChange={(e) => setTitle(e.target.value)}
+            onBlur={() => fetchBookFromDbpedia(title)} 
+            placeholder='Title' name='title' 
+          />
+          <input 
+            type='text' 
+            onChange={(e) => setAuthor(e.target.value)}
+            value={author}
+            placeholder='Author' 
+            name='author' 
+          />
+          <textarea 
+            value={description} 
+            placeholder='Description' 
+            name='description' 
+          />
 
           <button>Save</button>
         </form>
