@@ -60,6 +60,12 @@ export class BooksService {
     })
   }
 
+  async searchItemAsRdf(searchItem: string): Promise<Book[]> {
+    const books = await this.searchBook(searchItem)
+    const rdfBooksList = books.map(book => this.bookToRdf(book))
+    return rdfBooksList
+  }
+
   async fetchBookFromDbpedia(bookTitle: string): Promise<DbpediaBook> {
     const query = `
       PREFIX dbo: <http://dbpedia.org/ontology/>
@@ -94,5 +100,25 @@ export class BooksService {
     const author = words[words.length - 1]
 
     return { description, author }
+  }
+
+  private bookToRdf(book: Book) {
+    const context = {
+      "@context": {
+        "title": "http://schema.org/name",
+        "author": "http://schema.org/author",
+        "description": "http://schema.org/description",
+        "type": "@type"
+      },
+      "@type": "Book"
+    }
+
+    const jsonLd = Object.assign(book, context)
+
+    delete jsonLd.created_at
+    delete jsonLd.updated_at
+    delete jsonLd.id
+    
+    return jsonLd
   }
 }

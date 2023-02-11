@@ -9,6 +9,11 @@ import { UpdateBookDto } from './dto/update-book.dto';
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
 
+  @Get('/search/rdf')
+  searchItemAsRdf(@Query() query: { searchItem: string }) {
+    return this.booksService.searchItemAsRdf(query.searchItem)
+  }
+
   @Get('/search')
   searchItem(@Query() query: { searchItem: string }) {
     return this.booksService.searchBook(query.searchItem)
